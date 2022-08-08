@@ -1,0 +1,45 @@
+{% extends 'superuser/layout.html' %}
+{% block main %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">{{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <div class="card">
+                <div class="card-header text-uppercase text-center text-bg-primary">{{ question.get_category.get_cat_name }}</div>
+                <div class="card-body">
+                    <form action="{% url 'superuser:edit-question' question.get_id %}" method="post" id="edit-question" class="needs-validation align-items-center row g-3" novalidate>
+                        {% csrf_token %}
+                        <div class="col-2">
+                            <label for="statement">Statement:</label>
+                        </div>
+                        <div class="col-10">
+                            <textarea autofocus placeholder="Please type your question here ..." class="form-control" name="statement" cols="40" rows="3" required="" id="tatement">{{ question.get_statement }}</textarea>
+                            <div class=" valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please provide statement for the quesiton.</div>
+                        </div>
+                        {% for option in question.get_options %}
+                        <div class="col-2">
+                            <label for="option_{{ forloop.counter }}" class="form-label">Option {{ forloop.counter }}:</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" id="option_{{ forloop.counter }}" name="option_{{ forloop.counter }}" value="{{ option.get_option_text }}" required>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        {% endfor %}
+                        <input name="category" value="{{ question.get_category.get_cat_id }}" type="hidden">
+                    </form>
+                </div>
+                <div class="card-footer text-center text-bg-primary">
+                    <button type="submit" form="edit-question" class="btn btn-dark btn-sm">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

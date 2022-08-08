@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% load humanize %}
+{% block main %}
+<div class="container">
+    <!-- row for all cards -->
+    <div class="row g-3 my-3 mx-auto">
+        {% if messages %}
+        <!-- Error messages -->
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="btn-close border" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% for category in categories %}
+        <div class="col-12 col-md-6 col-lg-4 col-xxl-3 animation">
+            <div class="card bg-light my-card shadow h-100 " title="Click here to visit {{ category.get_cat_name }} category">
+                <div class="text-center">
+                    <img class="img-fluid rounded-top card-image" alt="{{ category.get_cat_name }}" src="{{ category.get_cat_image_url }}">
+                </div>
+                <div class="card-body bg-info rounded-bottom">
+                    <h5 class="card-title">{{ category.get_cat_name }}</h5>
+                    <p class="card-text">
+                        <div>Questions: {{ category.get_num_of_questions }}</div>
+                        <div>Updated: {{ category.get_date_updated|naturaltime }}</div>
+                    </p>
+                    <a href="{% url 'tests:take-a-test' category.get_cat_id %}" class="btn btn-outline-dark">Take a Test</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock main %}

@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block main %}
+<!-- row starts here -->
+<div class="row p-5">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6 offset-12 offset-sm-1 offset-md-2 offset-lg-3 bg-info p-2 rounded">
+        <!-- Error messages -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">{{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h1 class="text-center">Login</h1>
+        <form action="{% url 'users:login' %}" method="post" class="px-0 needs-validation" autocomplete="off" novalidate>
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                <input type="text" name="username" id="username" placeholder="..." class="form-control" required value="{{ username }}">
+                <label for="username">Username</label>
+                <div class="invalid-feedback">Please provide your username.</div>
+                <div class="valid-feedback">Looks gooed!</div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" name="password" id="password" placeholder="..." class="form-control" required>
+                <label for="password">Password</label>
+                <img src="{% static 'icons/eye.png' %}" alt="eye" class="float-end me-3" style="margin-top:-35px;cursor: pointer" onclick="togglePassword(this);">
+                <div class="invalid-feedback">Please provide your password.</div>
+                <div class="valid-feedback">Looks gooed!</div>
+            </div>
+            <input type="hidden" name="next" value="{{ request.GET.next }}">
+            <div class="pt-2 text-center">
+                <button type="submit" class="btn btn-primary">Login</button>
+                <p class="pt-2">Didn't have an account <a href="{% url 'users:register' %}" class="text-white">Register</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    const forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+            if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+    })
+})()
+</script>
+{% endblock main %}

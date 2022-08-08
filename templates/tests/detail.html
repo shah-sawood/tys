@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% load tags %}
+{% block head %}
+<style>
+    @media (min-width: 768px) {
+            .w-98 {
+                width: 98% !important;
+            }
+            .me {
+                width: fit-content !important;
+            }
+        }
+    </style>
+{% endblock head %}
+{% block main %}
+<div class="container">
+    <div class="row g-3 my-3" id="questions">
+        <!-- Error messages -->
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h1 class="text-center">
+            {{ category.get_cat_name }}
+        </h1>
+        {% for question in category.get_questions %}
+        <ul class="list-group" id="question{{ question.get_id }}">
+            <li class="list-group-item list-group-item-secondary">
+                {{ forloop.counter }}. {{ question.get_statement }}
+                <a href="#question{{ question.get_id }}" class="anchor-link">¶</a>
+                {% if question.options %}
+                <ul class="list-group">
+                    {% for choice in question.options.all %}
+                    <li class="list-group-item list-group-item-info text-truncate">
+                        {{ forloop.counter|convertNum2Alpha }})&nbsp;{{ choice.option }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="text-center my-1">
+                    <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#showAnswerForQuestion{{ question.id }}" aria-expanded="false" aria-controls="showAnswerForQuestion{{ question.id }}">
+                        View Answer
+                    </a>
+                </div>
+                <div class="collapse" id="showAnswerForQuestion{{ question.id }}">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-success text-white">
+                            {{ question.get_correct_option.get_option_text }}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        {% empty %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <span>This category has no questions! If interested, click <a href="{% url 'tests:add-question' category.get_cat_id %}">suggest</a> question to add questions.</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- end of row -->
+{% endblock main %}

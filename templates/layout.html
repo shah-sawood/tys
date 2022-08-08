@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'css/layout.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'images/logo.png' %}" rel="icon" type="image/png">
+        <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+        <title>{% block title %}{% endblock title %}{{ title }} || Test Your Skills</title>
+        {% block head %}{% endblock head %}
+    </head>
+
+    <body style="padding-bottom: 70px!important;">
+        <!-- Header starts here -->
+        {% include 'header.html' %}
+        <!-- Header ended -->
+        <!-- Navbar starts here -->
+        {% include 'navbar.html' %}
+        <!-- Navbar ended -->
+        <!-- Main starts here -->
+        {% block main %}{% endblock main %}
+        <!-- Main ended -->
+        <!-- Footer starts here -->
+        {% include 'footer.html' %}
+        <!-- Footer ends -->
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/index.js' %}"></script>
+    </body>
+
+</html>

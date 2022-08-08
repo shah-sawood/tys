@@ -1,0 +1,43 @@
+{% extends 'superuser/layout.html' %}
+{% block main %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header text-center text-bg-primary">Add New Category</div>
+                <div class="card-body">
+                    <form action="{% url 'superuser:add-category' %}" method="post" id="add-category" class="needs-validation align-items-center row g-3" novalidate enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col-2">
+                            <label for="cat_name" class="form-label">Category Name:</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" autofocus name="cat_name" placeholder="category name" id="cat_name" maxlength="72" required class="form-control p-2" value="{{ cat_name }}">
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please provide a name for category.</div>
+                        </div>
+                        <div class="col-2">
+                            <label for="cat_desc" class="form-label">Category Description:</label>
+                        </div>
+                        <div class="col-10">
+                            <textarea name="cat_desc" cols="40" placeholder="Please type some description for the category. (optional)" rows="3" id="cat_desc" value="{{ cat_desc }}" class="form-control p-2"></textarea>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="col-2">
+                            <label for="cat_image" class="form-label">Category Image:</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="file" name="cat_image" id="cat_image" value="{{ cat_image }}" accept="image/*" class="form-control">
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please provide an image for category.</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center text-bg-primary">
+                    <button type="submit" form="add-category" class="btn btn-dark btn-sm">Add Category</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends 'superuser/layout.html' %}
+{% load static %}
+{% block main %}
+<div class="container my-5">
+    <div class="row p-3">
+        <div class="col-12 col-md-10 offset-md-1 shadow rounded p-3">
+            <form action="{% url 'superuser:add-user' %}" method="post" novalidate class="needs-validation align-items-center row g-3">
+                {% csrf_token %}
+                <h3 class="text-center">Add New User</h3>
+                {% if messages %}
+                <div class="col-12">
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <div class="col-2">
+                    <label for="username">Username: </label>
+                </div>
+                <div class="col-10">
+                    <input type="email" autofocus name="username" id="username" value="{{ username }}" required placeholder="someone@example.com" class="form-control p-2">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide your username.</div>
+                </div>
+                <div class="col-2">
+                    <label for="first_name">First Name: </label>
+                </div>
+                <div class="col-10">
+                    <input type="text" name="first_name" id="first_name" value="{{ first_name }}" required placeholder="First Name" class="form-control p-2">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide your first name.</div>
+                </div>
+                <div class="col-2">
+                    <label for="last_name">Last Name: </label>
+                </div>
+                <div class="col-10">
+                    <input type="text" name="last_name" id="last_name" value="{{ last_name }}" required placeholder="Last Name" class="form-control p-2">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide your last name.</div>
+                </div>
+                <div class="col-2">
+                    <label for="password">Password: </label>
+                </div>
+                <div class="col-10">
+                    <input type="password" name="password" id="password" required placeholder="Password" class="form-control p-2">
+                    <img src="{% static 'icons/eye.png' %}" alt="eye" class="float-end" style="cursor: pointer; margin-right: 11px;margin-top:-29px" onclick="togglePassword(this);">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide your password.</div>
+                </div>
+                <div class="col-2">
+                    <label for="confirm_password">Confirm Password: </label>
+                </div>
+                <div class="col-10">
+                    <input type="password" name="confirm_password" id="confirm_password" required placeholder="Confirm Password" class="form-control p-2">
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please confirm your password.</div>
+                </div>
+                <div class="col text-center">
+                    <button class="btn btn-outline-danger btn-sm" type="reset" title="Reset form">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                        </svg>
+                    </button>
+                    <button class="btn btn-outline-dark btn-sm" type="submit" title="Submit form">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main %}

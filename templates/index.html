@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block head %}
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', removeFooter);
+
+function removeFooter() {
+    document.querySelector('footer').remove();
+};
+</script>
+{% endblock head %}
+{% block main %}
+<div class="container">
+    <div class="row align-items-center mt-5">
+        {% if messages %}
+        <!-- Error messages -->
+        {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+            <span>{{ message }}</span>
+            <button type="button" class="btn-close border" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="col-lg-6 col-xl-6 col-xxl-6 p-lg-3 mt-5">
+            <div class="">
+                <h1 class="text-uppercase fw-bold display-6">test your skills</h1>
+                <p class="text-truncate">Skill testing can give recruiters a competitive advantage in today's job market. Candidates who are hired on merit, rather than background, tend to stay longer and perform better over the long term. Here's how to use skills assessments to fill your open positions, no matter how many applicants you are dealing with.</p>
+            </div>
+            <a href="{% url 'tests:categories' %}" class="btn btn-outline-primary text-capitalize">
+                Start your journey
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                </svg>
+            </a>
+        </div>
+        <div class="col-lg-6 col-xl-6 col-xxl-6 p-lg-3 mt-lg-5">
+            <img src="{% static 'images/cover.png' %}" class="img-fluid my-auto" alt="cover" id="cover">
+        </div>
+    </div>
+</div>
+{% endblock main %}

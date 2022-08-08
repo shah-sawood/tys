@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'images/logo.png' %}" rel="icon" type="image/png">
+        <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+        <title>{% block title %}{% endblock title %}{{ title }} || Admin Panel</title>
+        {% block head %}{% endblock head %}
+    </head>
+
+    <body>
+        {% include 'superuser/navbar.html' %}
+        {% block main %}{% endblock main %}
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/index.js' %}"></script>
+        {% block script %}{% endblock script %}
+    </body>
+
+</html>
