@@ -1,8 +1,10 @@
-from django.contrib.auth.models import AbstractUser
+"""Model Layer"""
 from django.db import models
 
 # Create your models here.
 class Category(models.Model):
+    """Category Model"""
+
     cat_image = models.ImageField(
         upload_to="static/tests/category/images/",
         default="static/tests/category/images/default.png",
@@ -13,6 +15,8 @@ class Category(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
+        """Extra info about category model"""
+
         verbose_name_plural = "Categories"
 
     def get_cat_id(self):
@@ -60,6 +64,8 @@ class Category(models.Model):
 
 
 class Question(models.Model):
+    """Question Model"""
+
     choices = ((True, "published"), (False, "Not published"))
     statement = models.TextField()
     category = models.ForeignKey(
@@ -106,6 +112,8 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
+    """choice model"""
+
     option = models.CharField(max_length=300)
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="options"
