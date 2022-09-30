@@ -12,7 +12,7 @@
         {% block head %}{% endblock head %}
     </head>
 
-    <body style="padding-bottom: 70px!important;">
+    <body>
         <!-- Header starts here -->
         {% include 'header.html' %}
         <!-- Header ended -->
@@ -20,7 +20,7 @@
         {% include 'navbar.html' %}
         <!-- Navbar ended -->
         <!-- Main starts here -->
-        {% block main %}{% endblock main %}
+        <div class="container-fluid">{% block main %}{% endblock main %}</div>
         <!-- Main ended -->
         <!-- Footer starts here -->
         {% include 'footer.html' %}
