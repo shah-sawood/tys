@@ -25,9 +25,6 @@ from .helpers import add_questions_to_db
 def index(request):
     context = {
         "title": "Index",
-        "num_of_categories": Category.objects.all().count(),
-        "num_of_users": User.objects.all().count(),
-        "num_of_questions": Question.objects.all().count(),
     }
     return render(request, "superuser/index.html", context)
 
@@ -180,7 +177,7 @@ def add_question(request, category_id=None):
 @require_http_methods(["GET"])
 @user_passes_test(is_admin)
 def show_questions(request):
-    context = {"title": "Questions", "questions": Question.objects.filter()}
+    context = {"title": "Questions", "questions": Question.objects.all()}
     return render(request, "superuser/questions.html", context)
 
 

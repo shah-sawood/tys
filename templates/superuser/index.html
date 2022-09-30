@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'admin:index' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-tools" viewBox="0 0 16 16">
                         <path d="M1 0 0 1l2.2 3.081a1 1 0 0 0 .815.419h.07a1 1 0 0 1 .708.293l2.675 2.675-2.617 2.654A3.003 3.003 0 0 0 0 13a3 3 0 1 0 5.878-.851l2.654-2.617.968.968-.305.914a1 1 0 0 0 .242 1.023l3.27 3.27a.997.997 0 0 0 1.414 0l1.586-1.586a.997.997 0 0 0 0-1.414l-3.27-3.27a1 1 0 0 0-1.023-.242L10.5 9.5l-.96-.96 2.68-2.643A3.005 3.005 0 0 0 16 3c0-.269-.035-.53-.102-.777l-2.14 2.141L12 4l-.364-1.757L13.777.102a3 3 0 0 0-3.675 3.68L7.462 6.46 4.793 3.793a1 1 0 0 1-.293-.707v-.071a1 1 0 0 0-.419-.814L1 0Zm9.646 10.646a.5.5 0 0 1 .708 0l2.914 2.915a.5.5 0 0 1-.707.707l-2.915-2.914a.5.5 0 0 1 0-.708ZM3 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026L3 11Z" />
@@ -13,11 +13,10 @@
                         Developer Site
                     </div>
                 </a>
-                <div class="text-white">currently: {{ num_of_users|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:add-user' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
                         <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -27,11 +26,10 @@
                         Add User
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_users|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:add-question' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-question-circle-fill" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z" />
@@ -40,11 +38,10 @@
                         Add Question
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_questions|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:add-category' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
                         <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z" />
@@ -53,11 +50,10 @@
                         Add Category
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_categories|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:upload-questions' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
                         <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z" />
@@ -66,11 +62,10 @@
                         Upload Questions
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_questions|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:users' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
                         <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
@@ -81,11 +76,10 @@
                         All Users
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_users|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:users' %}?flag=R@_^oi4BVI*3402" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-universal-access-circle" viewBox="0 0 16 16">
                         <path d="M8 4.143A1.071 1.071 0 1 0 8 2a1.071 1.071 0 0 0 0 2.143Zm-4.668 1.47 3.24.316v2.5l-.323 4.585A.383.383 0 0 0 7 13.14l.826-4.017c.045-.18.301-.18.346 0L9 13.139a.383.383 0 0 0 .752-.125L9.43 8.43v-2.5l3.239-.316a.38.38 0 0 0-.047-.756H3.379a.38.38 0 0 0-.047.756Z" />
@@ -95,11 +89,10 @@
                         Authorize as Admin
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_questions|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:show-questions' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
                         <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z" />
@@ -109,11 +102,10 @@
                         All Questions
                     </div>
                 </a>
-                <div class="text-muted">currently: {{ num_of_questions|default:0 }}</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:categories' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-boxes" viewBox="0 0 16 16">
                         <path d="M7.752.066a.5.5 0 0 1 .496 0l3.75 2.143a.5.5 0 0 1 .252.434v3.995l3.498 2A.5.5 0 0 1 16 9.07v4.286a.5.5 0 0 1-.252.434l-3.75 2.143a.5.5 0 0 1-.496 0l-3.502-2-3.502 2.001a.5.5 0 0 1-.496 0l-3.75-2.143A.5.5 0 0 1 0 13.357V9.071a.5.5 0 0 1 .252-.434L3.75 6.638V2.643a.5.5 0 0 1 .252-.434L7.752.066ZM4.25 7.504 1.508 9.071l2.742 1.567 2.742-1.567L4.25 7.504ZM7.5 9.933l-2.75 1.571v3.134l2.75-1.571V9.933Zm1 3.134 2.75 1.571v-3.134L8.5 9.933v3.134Zm.508-3.996 2.742 1.567 2.742-1.567-2.742-1.567-2.742 1.567Zm2.242-2.433V3.504L8.5 5.076V8.21l2.75-1.572ZM7.5 8.21V5.076L4.75 3.504v3.134L7.5 8.21ZM5.258 2.643 8 4.21l2.742-1.567L8 1.076 5.258 2.643ZM15 9.933l-2.75 1.571v3.134L15 13.067V9.933ZM3.75 14.638v-3.134L1 9.933v3.134l2.75 1.571Z" />
@@ -122,11 +114,10 @@
                         All Categories
                     </div>
                 </a>
-                <div class="text-white">All categories</div>
             </div>
         </div>
         <div class="col">
-            <div class="text-center shadow p-3 rounded h-100">
+            <div class="text-center shadow-sm p-4 bg-white rounded h-100">
                 <a href="{% url 'superuser:index' %}" class="text-decoration-none">
                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
@@ -135,7 +126,6 @@
                         Publish Questions
                     </div>
                 </a>
-                <div class="text-white">Publish Question</div>
             </div>
         </div>
     </div>
