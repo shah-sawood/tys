@@ -14,6 +14,7 @@ from tests.decorators import is_admin
 from tests.forms import QuestionForm, CategoryForm, FileForm
 from tests.models import Category, Choice, Question
 from users.forms import RegistrationForm
+from users.models import Notification
 
 from .helpers import add_questions_to_db
 
@@ -388,3 +389,11 @@ def authorize_as_admin(request):
             user.save()
             messages.success(request, "{} is admin now.".format(user.get_username()))
     return HttpResponseRedirect(reverse("superuser:users"))
+
+
+def show_notifications(request):
+    context = {
+        "title": "notifications",
+        "notifications": Notification.notifications.all(),
+    }
+    return render(request, "superuser/notifications.html", context)

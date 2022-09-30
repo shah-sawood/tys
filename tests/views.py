@@ -107,6 +107,9 @@ def add_question(request, category_id=None):
             choice = Choice.objects.get(id=choices[correct_choice].id)
             choice.correct = True
             choice.save()
+            Notification.notifications.create(
+                notifier=request.user, question=question, category=category
+            )
             messages.success(request, "Question added successfully.")
         else:
             context["errors"] = q_form.errors

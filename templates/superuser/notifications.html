@@ -1,0 +1,17 @@
+{% extends 'superuser/layout.html' %}
+{% block main %}
+<div class="container my-5">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+    {% for notification in notifications %}
+        <div class="col">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Info!</h4>
+                <p>{{ notification.get_notifier.get_username }} suggested a question in {{ notification.category.get_cat_name }}.</p>
+                <hr>
+                <p class="mb-0">{{ notification.get_question.get_statement }}.</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
