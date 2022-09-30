@@ -5,9 +5,9 @@ from django.test import Client, TestCase
 class TestUserApp(TestCase):
     """tests the user app"""
 
-    def check_status(self):
+    def test_login_page_status(self):
         """check the status of login page"""
         client = Client()
-        response = client.get("users/login/")
+        response = client.get("/users/login/")
 
         self.assertEqual(response.status_code, 200)
