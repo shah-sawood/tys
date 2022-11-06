@@ -76,7 +76,7 @@ def add_category(request):
 @user_passes_test(is_admin)
 @require_http_methods(["POST"])
 def delete_category(request):
-    category_id = request.POST.get("cat_id")
+    category_id = request.POST.get("id")
     try:
         category = Category.objects.get(id=category_id).delete()
         messages.success(request, "Category deleted successfully.")
@@ -105,7 +105,7 @@ def edit_category(request, category_id):
             messages.error(request, "Something went wrong. Please try again later.")
     else:
         context = {
-            "title": "Update - {}".format(category.get_cat_name()),
+            "title": "Update - {}".format(category.get_name()),
             "category": category,
         }
         return render(request, "superuser/update/category.html", context)
@@ -196,7 +196,7 @@ def upload_questions(request):
             counter = add_questions_to_db(filename, category)
             messages.success(request, f"{counter} questions added successfully.")
             return HttpResponseRedirect(
-                reverse("superuser:category", args=[category.get_cat_id()])
+                reverse("superuser:category", args=[category.get_id()])
             )
         else:
             messages.error(request, "Something went wrong. Please try again later.")
@@ -244,7 +244,7 @@ def edit_question(request, question_id):
             messages.success(request, "Question updated successfully.")
             return HttpResponseRedirect(
                 reverse(
-                    "superuser:category", args=[question.get_category().get_cat_id()]
+                    "superuser:category", args=[question.get_category().get_id()]
                 )
             )
         else:

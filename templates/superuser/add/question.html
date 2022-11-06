@@ -51,7 +51,7 @@
                         <option>Select a category</option>
                         {% endif %}
                         {% for category in categories %}
-                        <option value="{{ category.get_cat_id }}">{{ category.get_cat_name|lower }}</option>
+                        <option value="{{ category.get_id }}">{{ category.get_name|lower }}</option>
                         {% endfor %}
                     </select>
                     <label for="id_category">Category</label>

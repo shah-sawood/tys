@@ -11,7 +11,7 @@
             {% endfor %}
             {% endif %}
             <div class="card">
-                <div class="card-header text-uppercase text-center text-bg-primary">{{ question.get_category.get_cat_name }}</div>
+                <div class="card-header text-uppercase text-center text-bg-primary">{{ question.get_category.get_name }}</div>
                 <div class="card-body">
                     <form action="{% url 'superuser:edit-question' question.get_id %}" method="post" id="edit-question" class="needs-validation align-items-center row g-3" novalidate>
                         {% csrf_token %}
@@ -32,7 +32,7 @@
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                         {% endfor %}
-                        <input name="category" value="{{ question.get_category.get_cat_id }}" type="hidden">
+                        <input name="category" value="{{ question.get_category.get_id }}" type="hidden">
                     </form>
                 </div>
                 <div class="card-footer text-center text-bg-primary">

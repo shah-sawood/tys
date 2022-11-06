@@ -14,8 +14,8 @@
     translate: -2px -2px -2px;
 }
 
-#categories .card .card-body h5 + p.card-text {
-    hyphens: auto;
+#categories .card .card-body .card-title {
+    font-variant: small-caps;
 }
 
 @keyframes display {

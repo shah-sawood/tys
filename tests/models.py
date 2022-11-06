@@ -36,7 +36,7 @@ class Category(models.Model):
         return self.description
 
     def get_name(self):
-        """returns cat_name"""
+        """returns name"""
         return self.name
 
     def get_date_updated(self):

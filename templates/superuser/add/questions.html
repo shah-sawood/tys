@@ -44,7 +44,7 @@
                                         <select class="form-select" required name="category" id="category">
                                             <option value="">Please select a category.</option>
                                             {% for category in categories %}
-                                            <option value="{{ category.get_cat_id }}">{{ category.get_cat_name|lower }}
+                                            <option value="{{ category.get_id }}">{{ category.get_name|lower }}
                                             </option>
                                             {% endfor %}
                                         </select>
