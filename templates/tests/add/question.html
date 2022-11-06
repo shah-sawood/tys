@@ -21,7 +21,7 @@
             {% endfor %}
         </div>
         {% endif %}
-        <form action="{% url 'tests:add-question' %}" method="post" class="needs-validation" novalidate autocomplete="off">
+        <form action="{% url 'superuser:add-question' %}" method="post" class="needs-validation" novalidate autocomplete="off">
             {% csrf_token %}
             <div class="col-12 col-md-10 offset-md-1 mb-3">
                 <div class="form-floating">
@@ -60,7 +60,7 @@
                         <option>Select a category</option>
                         {% endif %}
                         {% for category in categories %}
-                        <option value="{{ category.get_cat_id }}">{{ category.get_cat_name|lower }}</option>
+                        <option value="{{ category.get_id }}">{{ category.get_name|lower }}</option>
                         {% endfor %}
                     </select>
                     <label for="id_category">Category</label>

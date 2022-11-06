@@ -1,20 +1,21 @@
-.card-image {
-    /*width: 286px!important;*/
-    height: 145px !important;
-}
-
-.my-card {
-    transform: translate3d(0px, 0px, 0px);
-    transition-duration: 0.5s;
-    transition-property: transform;
+/* category page */
+#categories .card {
+    transition-duration: 250ms;
+    transition-property: translate;
     transition-timing-function: ease-in;
 }
 
-.my-card:hover {
-    transform: translate3d(-2px, -2px, -2px);
-    transition-duration: 0.5s;
-    transition-property: transform;
-    transition-timing-function: ease-in-out;
+#categories .card img {
+    height: 150px;
+    width: 150px;
+}
+
+#categories .card:hover {
+    translate: -2px -2px -2px;
+}
+
+#categories .card .card-body .card-title {
+    font-variant: small-caps;
 }
 
 @keyframes display {
@@ -30,9 +31,7 @@
 
 .animation {
     animation-name: display;
-    animation-duration: 2s;
-    animation-direction: normal;
-    animation-timing-function: step-start;
+    animation-duration: 200ms;
 }
 
 .anchor-link {
@@ -44,11 +43,6 @@
 
 .anchor-link:hover {
     opacity: 100%;
-    transition: opacity 200ms ease-in-out;
-}
-
-.word-break {
-    word-break: break-all;
 }
 
 #topBtn {

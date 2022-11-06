@@ -29,14 +29,7 @@ category = [
     path("<category_id>/", views.show_questions, name="take-a-test"),
 ]
 
-# add urls
-add = [
-    path("question/", views.add_question, name="add-question"),
-    path("question/<category_id>/", views.add_question, name="add-question"),
-]
-
 # overall urls
 urlpatterns = [
     path("category/", include(category)),
-    path("add/", include(add)),
 ]

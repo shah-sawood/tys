@@ -1,0 +1,31 @@
+{% extends 'superuser/layout.html' %}
+{% block main %}
+<div class="container my-5">
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+            {{ message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <div class="row row-cols-1 row-cols-md-2">
+        {% for notification in notifications %}
+        <div class="col">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading d-flex">
+                    Info!
+                    <a class="ms-auto btn btn-sm btn-success" href="{% url 'superuser:approve-question' %}?question_id={{ notification.get_question.id }}&notification_id={{ notification.id }}">
+                        <small>approve</small>
+                    </a>
+                </h4>
+                <p>
+                    {{ notification.get_notifier.get_username }} suggested a question in {{ notification.category.get_name }}.</p>
+                <hr>
+                <p class="mb-0">{{ notification.get_question.get_statement }}.</p>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">No activities has recently occured.</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

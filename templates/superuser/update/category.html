@@ -11,23 +11,23 @@
             {% endfor %}
             {% endif %}
             <div class="card">
-                <div class="card-header text-uppercase text-center text-bg-primary">{{ category.get_cat_name }}</div>
+                <div class="card-header text-uppercase text-center text-bg-primary">{{ category.get_name }}</div>
                 <div class="card-body">
-                    <form action="{% url 'superuser:edit-category' category.get_cat_id %}" method="post" id="add-category" class="needs-validation align-items-center row g-3" novalidate enctype="multipart/form-data">
+                    <form action="{% url 'superuser:edit-category' category.get_id %}" method="post" id="add-category" class="needs-validation align-items-center row g-3" novalidate enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="col-2">
-                            <label for="cat_name" class="form-label">Category Name:</label>
+                            <label for="name" class="form-label">Category Name:</label>
                         </div>
                         <div class="col-10">
-                            <input type="text" autofocus name="cat_name" placeholder="category name" id="cat_name" maxlength="72" required class="form-control p-2" value="{{ category.get_cat_name }}">
+                            <input type="text" autofocus name="name" placeholder="category name" id="name" maxlength="72" required class="form-control p-2" value="{{ category.get_name }}">
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please provide a name for category.</div>
                         </div>
                         <div class="col-2">
-                            <label for="cat_desc" class="form-label">Category Description:</label>
+                            <label for="desc" class="form-label">Category Description:</label>
                         </div>
                         <div class="col-10">
-                            <textarea name="cat_desc" cols="40" maxlength="800" placeholder="Please type some description for the category. (optional)" rows="3" id="cat_desc" class="form-control p-2">{{ category.get_cat_desc }}</textarea>
+                            <textarea name="desc" cols="40" maxlength="800" placeholder="Please type some description for the category. (optional)" rows="3" id="desc" class="form-control p-2">{{ category.get_desc }}</textarea>
                             <div class="valid-feedback">Looks good!</div>
                         </div>
                     </form>

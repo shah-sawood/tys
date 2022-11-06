@@ -21,7 +21,8 @@ from django.urls import include, path
 def home(request):
     return render(request, "index.html", {"title": "Welcome"})
 
-
+admin.site.site_header = "Test Your Skills"
+admin.site.index_title = "Dashboard"
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home, name="index"),

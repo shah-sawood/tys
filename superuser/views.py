@@ -14,6 +14,7 @@ from tests.decorators import is_admin
 from tests.forms import QuestionForm, CategoryForm, FileForm
 from tests.models import Category, Choice, Question
 from users.forms import RegistrationForm
+from users.models import Notification
 
 from .helpers import add_questions_to_db
 
@@ -33,7 +34,7 @@ def index(request):
 @user_passes_test(is_admin)
 @require_http_methods(["GET"])
 def show_categories(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by("-id")
     context = {
         "title": "Categories . {}".format(categories.count()),
         "categories": categories,
@@ -75,7 +76,7 @@ def add_category(request):
 @user_passes_test(is_admin)
 @require_http_methods(["POST"])
 def delete_category(request):
-    category_id = request.POST.get("cat_id")
+    category_id = request.POST.get("id")
     try:
         category = Category.objects.get(id=category_id).delete()
         messages.success(request, "Category deleted successfully.")
@@ -104,7 +105,7 @@ def edit_category(request, category_id):
             messages.error(request, "Something went wrong. Please try again later.")
     else:
         context = {
-            "title": "Update - {}".format(category.get_cat_name()),
+            "title": "Update - {}".format(category.get_name()),
             "category": category,
         }
         return render(request, "superuser/update/category.html", context)
@@ -113,7 +114,6 @@ def edit_category(request, category_id):
 
 # add new question
 @login_required
-@user_passes_test(is_admin)
 def add_question(request, category_id=None):
 
     category_id = category_id if category_id else ""
@@ -150,6 +150,8 @@ def add_question(request, category_id=None):
             category = Category.objects.get(id=category_id)
 
             question = q_form.save(commit=False)
+            if request.user.is_superuser:
+                question.published = True
             question.category = category  # add category to question
             question.save()  # save question
 
@@ -162,8 +164,6 @@ def add_question(request, category_id=None):
             choice = Choice.objects.get(id=choices[correct_choice].id)
             choice.correct = True
             choice.save()
-            question.published = True
-            question.save()
             messages.success(request, "Question added successfully.")
         else:
             messages.error(request, "Something went wrong. Please try again later.")
@@ -196,7 +196,7 @@ def upload_questions(request):
             counter = add_questions_to_db(filename, category)
             messages.success(request, f"{counter} questions added successfully.")
             return HttpResponseRedirect(
-                reverse("superuser:category", args=[category.get_cat_id()])
+                reverse("superuser:category", args=[category.get_id()])
             )
         else:
             messages.error(request, "Something went wrong. Please try again later.")
@@ -244,7 +244,7 @@ def edit_question(request, question_id):
             messages.success(request, "Question updated successfully.")
             return HttpResponseRedirect(
                 reverse(
-                    "superuser:category", args=[question.get_category().get_cat_id()]
+                    "superuser:category", args=[question.get_category().get_id()]
                 )
             )
         else:
@@ -275,20 +275,24 @@ def add_choice(request, question_id):
 @login_required
 def approve_question(request):
     """approve question"""
-    question_id = request.GET.get("quesiton_id")
+    question_id = request.GET.get("question_id")
     notification_id = request.GET.get("notification_id")
+    print("{ question_id = }")
+    print("{ notification_id = }")
     try:
         question = Question.objects.get(pk=question_id)
         question.published = True
         question.save()
 
         notificaiton = Notification.notifications.get(pk=notification_id)
-        notificaiton.read = True
+        notificaiton.is_read = True
         notificaiton.save()
-        messages.success(request, "Question approved successfully.")
     except (Question.DoesNotExist, Notification.DoesNotExist):
-        pass
-    return HttpResponseRedirect(reverse("users:notifications"))
+        messages.error(request, 'The system encountered a problem. Please try again later.')
+    else:
+        messages.success(request, "Question approved successfully.")
+    finally:
+        return HttpResponseRedirect(reverse("superuser:index"))
 
 
 @require_http_methods(["GET", "POST"])
@@ -350,41 +354,46 @@ def update_profile(request, user_id):
 @user_passes_test(is_admin)
 @require_http_methods(["GET"])
 def users(request):
-    users = User.objects.all()
+    users = User.objects.filter(is_superuser=False)
     context = {
         "title": "Users - {}".format(users.count()),
         "users": users,
     }
-    flag = request.GET.get("flag")
-    if flag == "R@_^oi4BVI*3402":
-        context["flag"] = 1
     return render(request, "superuser/users.html", context)
 
 
 @login_required
 @user_passes_test(is_admin)
-@require_http_methods(["POST"])
+@require_http_methods(["GET"])
 def authorize_as_admin(request):
-    user_id = request.POST.get("user_id")
+    user_id = request.GET.get("user_id")
+    group_name = request.GET.get("group_name")
     try:
         user = User.objects.get(id=user_id)
-        test_manager = Group.objects.get(name="tests_manager")
-        user_manager = Group.objects.get(name="user_manager")
-    except User.DoesNotExist:
-        messages.error(request, "Something went wrong. Please try again later.")
+        group = Group.objects.get(name=group_name)
+    except (User.DoesNotExist, Group.DoesNotExist):
+        messages.error(request, "Our system encountered a problem. Please try again later.")
     else:
-        if user.is_superuser:
-            user.groups.remove(test_manager, user_manager)
-            # user.is_superuser = False
-            user.is_staff = False
+        if user.groups.filter(name=group_name).exists():
+            user.groups.remove(group)
+            if not user.groups.filter().exists():
+                user.is_staff = False
             user.save()
             messages.success(
-                request, "{} is no longer admin.".format(user.get_username())
+                request, "{} is no longer {}.".format(user.get_username(), group_name)
             )
         else:
-            # user.is_superuser = True
             user.is_staff = True
-            user.groups.add(test_manager, user_manager)
+            user.groups.add(group)
             user.save()
-            messages.success(request, "{} is admin now.".format(user.get_username()))
-    return HttpResponseRedirect(reverse("superuser:users"))
+            messages.success(request, "{} is {} now.".format(user.get_username(), group_name))
+    finally:
+        return HttpResponseRedirect(reverse("superuser:users"))
+
+
+def show_notifications(request):
+    context = {
+        "title": "notifications",
+        "notifications": Notification.notifications.filter(is_read=False),
+    }
+    return render(request, "superuser/notifications.html", context)

@@ -1,31 +1,41 @@
 {% extends 'layout.html' %}
+{% block head %}
+<style>
+    body {
+        background-color: var(--bs-light);
+    }
+</style>
+{% endblock %}
 {% load humanize %}
 {% block main %}
-<div class="container">
+<div class="container py-5" id="categories">
     <!-- row for all cards -->
-    <div class="row g-3 my-3 mx-auto">
+    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xxl-5">
         {% if messages %}
         <!-- Error messages -->
         {% for message in messages %}
-        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
             <span>{{ message }}</span>
             <button type="button" class="btn-close border" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
         {% endif %}
         {% for category in categories %}
-        <div class="col-12 col-md-6 col-lg-4 col-xxl-3 animation">
-            <div class="card bg-light my-card shadow h-100 " title="Click here to visit {{ category.get_cat_name }} category">
-                <div class="text-center">
-                    <img class="img-fluid rounded-top card-image" alt="{{ category.get_cat_name }}" src="{{ category.get_cat_image_url }}">
-                </div>
-                <div class="card-body bg-info rounded-bottom">
-                    <h5 class="card-title">{{ category.get_cat_name }}</h5>
-                    <p class="card-text">
-                        <div>Questions: {{ category.get_num_of_questions }}</div>
-                        <div>Updated: {{ category.get_date_updated|naturaltime }}</div>
+        <div class="col animation">
+            <div class="card border-0 rounded-4 shadow h-100">
+                <div class="card-body text-center">
+                    <img class="rounded-circle" alt="{{ category.get_name }}" src="{{ category.get_image_url }}">
+                    <h5 class="card-title text-primary">{{ category.get_name }}</h5>
+                    <p class="card-text text-truncate">{{ category.get_description|truncatewords:10 }}</p>
+                    <hr>
+                    <p class="card-text text-muted text-end">
+                        Questions: {{ category.get_num_of_questions }}
+                        <br>
+                        Updated: {{ category.get_date_updated|naturaltime }}
                     </p>
-                    <a href="{% url 'tests:take-a-test' category.get_cat_id %}" class="btn btn-outline-dark">Take a Test</a>
+                    <hr>
+                    <a href="{% url 'tests:take-a-test' category.get_id %}" class="card-link">Take a Test</a>
                 </div>
             </div>
         </div>

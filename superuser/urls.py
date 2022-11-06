@@ -63,5 +63,6 @@ urlpatterns = [
     path("edit/", include(edit)),
     path("user/", include(user)),
     path("questions/", views.show_questions, name="show-questions"),
+    path("notifications/", views.show_notifications, name="notifications"),
     path("approve/question/", views.approve_question, name="approve-question"),
 ]
