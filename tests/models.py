@@ -5,12 +5,12 @@ from django.db import models
 class Category(models.Model):
     """Category Model"""
 
-    cat_image = models.ImageField(
+    image = models.ImageField(
         upload_to="static/tests/category/images/",
         default="static/tests/category/images/default.png",
     )
-    cat_desc = models.TextField(blank=True)
-    cat_name = models.CharField(max_length=72, unique=True)
+    description = models.TextField(blank=True)
+    name = models.CharField(max_length=72, unique=True)
     date_updated = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -19,25 +19,25 @@ class Category(models.Model):
 
         verbose_name_plural = "Categories"
 
-    def get_cat_id(self):
+    def get_id(self):
         """returns id for this category"""
         return self.id
 
-    def get_cat_image(self):
+    def get_image(self):
         """returns category image for this category"""
-        return self.cat_image
+        return self.image
 
-    def get_cat_image_url(self):
+    def get_image_url(self):
         """returns category image url"""
-        return self.get_cat_image().url
+        return self.get_image().url
 
-    def get_cat_desc(self):
+    def get_description(self):
         """returns category_description"""
-        return self.cat_desc
+        return self.description
 
-    def get_cat_name(self):
+    def get_name(self):
         """returns cat_name"""
-        return self.cat_name
+        return self.name
 
     def get_date_updated(self):
         """returns the date on which this category was updated"""
@@ -56,17 +56,17 @@ class Category(models.Model):
         return self.get_questions().count()
 
     def __str__(self):
-        return f"{self.cat_name}"
+        return f"{self.name}"
 
     def save(self, *args, **kwargs):
-        self.cat_name = self.cat_name.title()
+        self.name = self.name.title()
         super().save(*args, **kwargs)
 
 
 class Question(models.Model):
     """Question Model"""
 
-    choices = ((True, "published"), (False, "Not published"))
+    choices = ((True, "Published"), (False, "Not published"))
     statement = models.TextField()
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, related_name="questions"

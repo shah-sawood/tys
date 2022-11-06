@@ -12,7 +12,7 @@ class QuestionForm(forms.ModelForm):
 
     class Meta:
         model = Question
-        fields = ["statement", "published"]
+        fields = ["statement"]
 
 
 # Category Form

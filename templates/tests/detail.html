@@ -24,7 +24,7 @@
         </div>
         {% endfor %}
         {% endif %}
-        <h1 class="text-center">
+        <h1 class="text-center" style="background-image: url('{{category.get_cat_image.url}}');-webkit-background-clip: text;color: transparent;background-repeat: no-repeat;background-size: cover;">
             {{ category.get_cat_name }}
         </h1>
         {% for question in category.get_questions %}
@@ -57,7 +57,7 @@
         </ul>
         {% empty %}
         <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <span>This category has no questions! If interested, click <a href="{% url 'tests:add-question' category.get_cat_id %}">suggest</a> question to add questions.</span>
+            <span>This category has no questions! If interested, click <a href="{% url 'superuser:add-question' category.get_cat_id %}">suggest</a> question to add questions.</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
