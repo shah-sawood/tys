@@ -25,7 +25,7 @@
         <div class="col animation">
             <div class="card border-0 rounded-4 shadow h-100">
                 <div class="card-body text-center">
-                    <img class="rounded-circle" alt="{{ category.get_name }}" src="{{ category.get_image_url }}">
+                    <img alt="{{ category.get_name }}" class="mb-2" src="{{ category.get_image_url }}">
                     <h5 class="card-title text-primary">{{ category.get_name }}</h5>
                     <p class="card-text text-truncate">{{ category.get_description|truncatewords:10 }}</p>
                     <hr>

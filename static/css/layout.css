@@ -7,7 +7,7 @@
 
 #categories .card img {
     height: 150px;
-    width: 150px;
+    max-width: 100%;
 }
 
 #categories .card:hover {

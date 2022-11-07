@@ -164,7 +164,10 @@ def add_question(request, category_id=None):
             choice = Choice.objects.get(id=choices[correct_choice].id)
             choice.correct = True
             choice.save()
-            messages.success(request, "Question added successfully.")
+            if request.user.is_superuser:
+                messages.success(request, "Question added and published successfully.")
+            else:
+                messages.success(request, "Thank you! Your suggestion has been sent to admin. You question will be published after reviewed by admin.")
         else:
             messages.error(request, "Something went wrong. Please try again later.")
         return HttpResponseRedirect(reverse("superuser:category", args=[category_id]))
