@@ -26,6 +26,7 @@ from .helpers import add_questions_to_db
 def index(request):
     context = {
         "title": "Index",
+        "notifications": Notification.notifications.filter(is_read=False).count()
     }
     return render(request, "superuser/index.html", context)
 
@@ -167,6 +168,7 @@ def add_question(request, category_id=None):
             if request.user.is_superuser:
                 messages.success(request, "Question added and published successfully.")
             else:
+                Notification.notifications.create(notifier=request.user, message=" added a question in ", question=question, category=category)
                 messages.success(request, "Thank you! Your suggestion has been sent to admin. You question will be published after reviewed by admin.")
         else:
             messages.error(request, "Something went wrong. Please try again later.")
