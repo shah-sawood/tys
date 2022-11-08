@@ -7,7 +7,7 @@
 
 #categories .card img {
     height: 150px;
-    width: 150px;
+    max-width: 100%;
 }
 
 #categories .card:hover {
@@ -18,20 +18,20 @@
     font-variant: small-caps;
 }
 
-@keyframes display {
-    from {
-        transform: scale(0);
-    }
-
-    to {
-        transform: scale(1);
-    }
-
+#categories {
+    animation-name: fade-in;
+    animation-duration: 2500ms;
+    animation-direction: alternate;
+    animation-fill-mode:both;
 }
 
-.animation {
-    animation-name: display;
-    animation-duration: 200ms;
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .anchor-link {

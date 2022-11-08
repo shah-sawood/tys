@@ -3,14 +3,15 @@
 {% block head %}
 <style>
     @media (min-width: 768px) {
-            .w-98 {
-                width: 98% !important;
-            }
-            .me {
-                width: fit-content !important;
-            }
+        .w-98 {
+            width: 98% !important;
         }
-    </style>
+
+        .me {
+            width: fit-content !important;
+        }
+    }
+</style>
 {% endblock head %}
 {% block main %}
 <div class="container">
@@ -18,13 +19,14 @@
         <!-- Error messages -->
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"
+            role="alert">
             <span>{{ message }}</span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endfor %}
         {% endif %}
-        <h1 class="text-center" style="background-image: url('{{category.get_image.url}}');-webkit-background-clip: text;color: transparent;background-repeat: no-repeat;background-size: cover;">
+        <h1 class="text-center">
             {{ category.get_name }}
         </h1>
         {% for question in category.get_questions %}
@@ -42,7 +44,9 @@
                 </ul>
                 {% endif %}
                 <div class="text-center my-1">
-                    <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#showAnswerForQuestion{{ question.id }}" aria-expanded="false" aria-controls="showAnswerForQuestion{{ question.id }}">
+                    <a class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#showAnswerForQuestion{{ question.id }}" aria-expanded="false"
+                        aria-controls="showAnswerForQuestion{{ question.id }}">
                         View Answer
                     </a>
                 </div>
@@ -56,9 +60,25 @@
             </li>
         </ul>
         {% empty %}
-        <div class="alert alert-info alert-dismissible fade show" role="alert">
-            <span>This category has no questions! If interested, click <a href="{% url 'superuser:add-question' category.get_id %}">suggest</a> question to add questions.</span>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <style>
+            body {
+                background-color: var(--bs-light);
+            }
+        </style>
+        <div class="col-12 col-md-6 offset-md-3">
+            <div class="card" style="--bs-card-border-color:var(--bs-primary)">
+                <h5 class="card-header text-bg-primary">
+                    We are sorry!
+                </h5>
+                <div class="card-body">
+                    <p class="text-muted">
+                        This category has no published questions. Its questions may be in pending for approval. If
+                        interested click the suggest below to suggest your questions.
+                    </p>
+                </div>
+                <a class="card-footer btn text-bg-primary"
+                    href="{% url 'superuser:add-question' category.get_id %}">Suggest</a>
+            </div>
         </div>
         {% endfor %}
     </div>
