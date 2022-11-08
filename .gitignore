@@ -1,2 +1,3 @@
 db.sqlite3
 !migrations/
+!static/users/images/
